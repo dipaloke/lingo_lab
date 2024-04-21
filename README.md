@@ -34,3 +34,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Features:
+
+- Next.js 14 & server actions
+- AI Voices using Elevenlabs AI
+- Beautiful component system using Shadcn UI
+- Amazing characters thanks to KenneyNL
+- Auth using Clerk
+- Sound effects
+- Hearts system
+- Points / XP system
+- No hearts left popup
+- Exit confirmation popup
+- Practice old lessons to regain hearts
+- Leaderboard
+- Quests milestones
+- Shop system to exchange points with hearts
+- Pro tier for unlimited hearts using Stripe
+- Landing page
+- Admin dashboard React Admin
+- ORM using DrizzleORM
+- PostgresDB using NeonDB
+- Deployment on Vercel
+- Mobile responsiveness
+
+## Packages:
+
+- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button)
+- []() -
