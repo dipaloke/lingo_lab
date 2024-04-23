@@ -58,6 +58,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - PostgresDB using NeonDB
 - Deployment on Vercel
 - Mobile responsiveness
+- edited ShadCN Button components
 
 ## Packages:
 

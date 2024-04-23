@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
-import { Button } from "@/components/ui/button";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>{children}</body>
-      <Button variant="destructive">Lingo Lab</Button>
     </html>
   );
 }
