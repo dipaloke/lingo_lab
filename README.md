@@ -62,6 +62,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Packages:
 
-- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet)
+- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip)
 - [@clerk/nextjs](https://clerk.com/docs/quickstarts/nextjs) - Auth
 - []() -
