@@ -55,7 +55,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Landing page
 - Admin dashboard React Admin
 - ORM using DrizzleORM
-- PostgresDB using NeonDB
+- PostgresDB using SupaBase
 - Deployment on Vercel
 - Mobile responsiveness
 - edited ShadCN Button components
@@ -64,4 +64,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip)
 - [@clerk/nextjs](https://clerk.com/docs/quickstarts/nextjs) - Auth
-- []() -
+- [drizzle-orm postgres](https://orm.drizzle.team/docs/get-started-postgresql#supabase) - Headless ORM for NodeJS, TypeScript and JavaScript
+- [drizzle-kit](https://github.com/drizzle-team/drizzle-kit-mirror#readme) - DrizzleKit - is a CLI migrator tool for DrizzleORM.
+- [dotenv](https://github.com/motdotla/dotenv#readme) - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
+- [pg](https://www.npmjs.com/package/pg) - Non-blocking PostgreSQL client for Node.js.
+-
