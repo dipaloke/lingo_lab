@@ -57,20 +57,20 @@ export const Sidebar = ({ className }: SidebarProps) => {
         <ClerkLoaded>
           <div className="flex justify-between">
             <UserButton afterSignOutUrl="/" />
-            <SignOutButton redirectUrl="/">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <SignOutButton redirectUrl="/">
                     <Button variant="ghost">
                       <LogOut className="h-5 w-5 text-muted-foreground stroke-red-400" />
                     </Button>
-                  </TooltipTrigger>
-                  <TooltipContent className="bg-destructive/10">
-                    <p className="text-muted-foreground">Log Out</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </SignOutButton>
+                  </SignOutButton>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-muted-foreground">Log Out</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </ClerkLoaded>
       </div>

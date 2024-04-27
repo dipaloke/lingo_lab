@@ -60,6 +60,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Mobile responsiveness
 - edited ShadCN Button components
 
+- If user don't have a course selected then user will always be redirected to the courses page.
+
 ## Packages:
 
 - [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip)
