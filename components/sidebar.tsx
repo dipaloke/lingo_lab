@@ -57,20 +57,16 @@ export const Sidebar = ({ className }: SidebarProps) => {
         <ClerkLoaded>
           <div className="flex justify-between">
             <UserButton afterSignOutUrl="/" />
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <SignOutButton redirectUrl="/">
-                    <Button variant="ghost">
-                      <LogOut className="h-5 w-5 text-muted-foreground stroke-red-400" />
-                    </Button>
-                  </SignOutButton>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className="text-muted-foreground">Log Out</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <SignOutButton redirectUrl="/">
+              <button className="group flex items-center justify-start w-9 h-9 bg-red-500 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1">
+                <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
+                  <LogOut className="h-4 text-muted-foreground stroke-[2] stroke-white" />
+                </div>
+                <div className="absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                  Logout
+                </div>
+              </button>
+            </SignOutButton>
           </div>
         </ClerkLoaded>
       </div>

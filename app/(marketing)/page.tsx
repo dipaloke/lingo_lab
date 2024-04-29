@@ -20,7 +20,7 @@ export default function Home() {
         <Image src="/hero.svg" fill alt="Hero" />
       </div>
       <div className="flex flex-col items-center gap-y-8">
-        <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center">
+        <h1 className="text-xl lg:text-3xl font-bold text-white max-w-[480px] text-center">
           Learn, practice and master new language with Lingo-Lab.
         </h1>
         <div className=" flex flex-col items-center gap-y-3 max-w-[330px] w-full">

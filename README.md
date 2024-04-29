@@ -61,10 +61,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - edited ShadCN Button components
 
 - If user don't have a course selected then user will always be redirected to the courses page.
+- Here we kept the DB queries & server actions separated.
 
 ## Packages:
 
-- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip)
+- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip, sonner)
 - [@clerk/nextjs](https://clerk.com/docs/quickstarts/nextjs) - Auth
 - [drizzle-orm postgres](https://orm.drizzle.team/docs/get-started-postgresql#supabase) - Headless ORM for NodeJS, TypeScript and JavaScript
 - [drizzle-kit](https://github.com/drizzle-team/drizzle-kit-mirror#readme) - DrizzleKit - is a CLI migrator tool for DrizzleORM.
