@@ -71,4 +71,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [drizzle-kit](https://github.com/drizzle-team/drizzle-kit-mirror#readme) - DrizzleKit - is a CLI migrator tool for DrizzleORM.
 - [dotenv](https://github.com/motdotla/dotenv#readme) - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
 - [pg](https://www.npmjs.com/package/pg) - Non-blocking PostgreSQL client for Node.js.
--
+- [tsx](https://www.npmjs.com/package/tsx) - TypeScript Execute (tsx): The easiest way to run TypeScript in Node.js.(using for seeding our DB)
