@@ -62,6 +62,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - If user don't have a course selected then user will always be redirected to the courses page.
 - Here we kept the DB queries & server actions separated.
+- courses -> units -> lessons -> challenge
+- we include only 2 type of challenges ("select", "assists"). More types can be added form drizzle schema.
 
 ## Packages:
 
