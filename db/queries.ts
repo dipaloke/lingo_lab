@@ -63,6 +63,10 @@ export const getUnits = cache(async () => {
   const normalizedData = data.map((unit) => {
     // For each 'unit' in 'data', map over its 'lessons' array
     const lessonsWithCompletedStatus = unit.lessons.map((lesson) => {
+      //if lessons don't contain challenges then make completed status to false
+      if (lesson.challenges.length === 0) {
+        return { ...lesson, completed: false };
+      }
       // Checking if all challenges in a 'lesson' are completed
       const allCompletedChallenges = lesson.challenges.every((challenge) => {
         // Verifying that each challenge has progress and all progress is marked as completed
