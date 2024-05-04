@@ -67,7 +67,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Packages:
 
-- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip, sonner, progress)
+- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip, sonner, progress, dialog)
 - [@clerk/nextjs](https://clerk.com/docs/quickstarts/nextjs) - Auth
 - [drizzle-orm postgres](https://orm.drizzle.team/docs/get-started-postgresql#supabase) - Headless ORM for NodeJS, TypeScript and JavaScript
 - [drizzle-kit](https://github.com/drizzle-team/drizzle-kit-mirror#readme) - DrizzleKit - is a CLI migrator tool for DrizzleORM.
@@ -75,3 +75,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [pg](https://www.npmjs.com/package/pg) - Non-blocking PostgreSQL client for Node.js.
 - [tsx](https://www.npmjs.com/package/tsx) - TypeScript Execute (tsx): The easiest way to run TypeScript in Node.js.(using for seeding our DB)
 - [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar#readme) - A circular progressbar component, built with SVG and extensively customizable
+- [zustand](https://github.com/pmndrs/zustand) - A small, fast and scalable bearbones state-management solution.
