@@ -64,6 +64,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Here we kept the DB queries & server actions separated.
 - courses -> units -> lessons -> challenge
 - we include only 2 type of challenges ("select", "assists"). More types can be added form drizzle schema.
+- Lesson page: **Exit Modal** is created with shadCN modal component and backend is done with **Zustand** state management system.
 
 ## Packages:
 
