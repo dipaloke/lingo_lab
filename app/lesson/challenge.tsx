@@ -35,7 +35,7 @@ export const Challenge = ({
           id={option.id}
           text={option.text}
           imageSrc={option.imageSrc}
-          shortcut={`${i + 1}`}
+          shortcut={`${i + 1}`} //simply add 1 with the index. These are the keyboard 1,2,3 shortcut for answering
           selected={selectedOption === option.id}
           onClick={() => onSelect(option.id)}
           status={status}
