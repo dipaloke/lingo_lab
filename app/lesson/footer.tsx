@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, Circle, XCircle } from "lucide-react";
 import { useKey, useMedia } from "react-use";
 
 type FooterProps = {
@@ -17,6 +17,7 @@ export const Footer = ({
   lessonId,
 }: FooterProps) => {
   useKey("Enter", onCheck, {}, [onclick]);
+
   //going to use react-use hook to determine the size of button
   const isMobile = useMedia("(max-width: 1024px)");
   return (
