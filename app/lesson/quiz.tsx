@@ -8,6 +8,11 @@ import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/actions/challenge-progress";
 import { toast } from "sonner";
 import { reduceHearts } from "@/actions/user-progress";
+import { useAudio, useWindowSize } from "react-use";
+import Image from "next/image";
+import { ResultCard } from "./result-card";
+import { useRouter } from "next/navigation";
+import Confetti from "react-confetti";
 
 type QuizProps = {
   initialLessonId: number;
@@ -27,10 +32,23 @@ export const Quiz = ({
   initialPercentage,
   userSubscription,
 }: QuizProps) => {
+  const { height, width } = useWindowSize();
+
+  const router = useRouter();
+
+  //? Sound feedback for correct, incorrect & finished answer.
+
+  const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true });
+  const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
+  const [incorrectAudio, _i, incorrectControls] = useAudio({
+    src: "/incorrect.wav",
+  });
+
   const [pending, startTransition] = useTransition();
 
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(initialPercentage);
+  const [lessonId] = useState(initialLessonId);
 
   //Accessing challenges to show dynamically
   //first we get the current challenge
@@ -60,7 +78,7 @@ export const Quiz = ({
   };
 
   const onNext = () => {
-    setActiveIndex((current) => current + 1);
+    setActiveIndex((current) => current + 1); //there will be error after finishing a challenge. coz if last challenge index is 3. then next index will be 4 . but we don't have anything on index 4. handled below after onContinue.
   };
 
   const onContinue = () => {
@@ -93,6 +111,7 @@ export const Quiz = ({
               console.error("Missing hearts");
               return;
             }
+            correctControls.play();
             setStatus("correct");
             setPercentage((prev) => prev + 100 / challenges.length);
 
@@ -113,6 +132,7 @@ export const Quiz = ({
               console.error("missing hearts");
               return;
             }
+            incorrectControls.play();
             setStatus("wrong");
             if (!response?.error) {
               setHearts((prev) => Math.max(prev - 1, 0));
@@ -121,46 +141,98 @@ export const Quiz = ({
           .catch(() => toast.error("Something went wrong. PLease try again!"));
       });
     }
-  }
-    const title =
-      challenge.type === "ASSISTS"
-        ? "Select the correct meaning."
-        : challenge.question;
+  };
 
+  //! handling onNext index error. Now shows this div after a challenge completion
+
+  if (!challenge) {
     return (
       <>
-        <Header
-          hearts={hearts}
-          percentage={percentage}
-          hasActiveSubscription={!!userSubscription?.isActive}
+        {finishAudio}
+        {/* glitter */}
+        <Confetti
+          recycle={false}
+          numberOfPieces={500}
+          tweenDuration={10000}
+          width={width}
+          height={height}
         />
-        <div className="flex-1">
-          <div className="h-full flex items-center justify-center">
-            <div className="lg:min-h-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
-              <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
-                {title}
-              </h1>
-              <div className="">
-                {challenge.type === "ASSISTS" && (
-                  <QuestionBubble question={challenge.question} />
-                )}
-                <Challenge
-                  options={options}
-                  onSelect={onSelect}
-                  status={status}
-                  selectedOption={selectedOption}
-                  disabled={pending}
-                  type={challenge.type}
-                />
-              </div>
-            </div>
+
+        <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
+          <Image
+            src="/finish.svg"
+            alt="finish"
+            height={100}
+            width={100}
+            className="hidden lg:block"
+          />
+          <Image
+            src="/finish.svg"
+            alt="finish"
+            height={50}
+            width={50}
+            className="lg:hidden block"
+          />
+          <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">
+            Great job! <br />
+            You&apos;ve completed the lesson
+          </h1>
+          <div className="flex items-center gap-x-4 w-full">
+            {/* we will know how many points user earned by counting th amount of challenges   */}
+            <ResultCard variant="points" value={challenges.length * 10} />
+            <ResultCard variant="hearts" value={hearts} />
           </div>
         </div>
         <Footer
-          disabled={pending || !selectedOption}
-          status={status}
-          onCheck={onContinue}
+          lessonId={lessonId}
+          status="completed"
+          onCheck={() => router.push("/learn")}
         />
       </>
     );
-  };
+  }
+
+  const title =
+    challenge.type === "ASSISTS"
+      ? "Select the correct meaning."
+      : challenge.question;
+
+  return (
+    <>
+      {incorrectAudio}
+      {correctAudio}
+      <Header
+        hearts={hearts}
+        percentage={percentage}
+        hasActiveSubscription={!!userSubscription?.isActive}
+      />
+      <div className="flex-1">
+        <div className="h-full flex items-center justify-center">
+          <div className="lg:min-h-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
+            <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
+              {title}
+            </h1>
+            <div className="">
+              {challenge.type === "ASSISTS" && (
+                <QuestionBubble question={challenge.question} />
+              )}
+              <Challenge
+                options={options}
+                onSelect={onSelect}
+                status={status}
+                selectedOption={selectedOption}
+                disabled={pending}
+                type={challenge.type}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer
+        disabled={pending || !selectedOption}
+        status={status}
+        onCheck={onContinue}
+      />
+    </>
+  );
+};

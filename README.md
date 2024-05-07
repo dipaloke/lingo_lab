@@ -80,3 +80,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar#readme) - A circular progressbar component, built with SVG and extensively customizable
 - [zustand](https://github.com/pmndrs/zustand) - A small, fast and scalable bear-bones state-management solution.
 - [react-use](https://github.com/streamich/react-use) - collection of essential react hooks.
+- [react-confetti](https://www.npmjs.com/package/react-confetti) - Confetti without the cleanup.

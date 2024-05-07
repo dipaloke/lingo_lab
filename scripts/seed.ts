@@ -62,6 +62,7 @@ const main = async () => {
       },
     ]);
 
+    //! lessons
     await db.insert(schema.lessons).values([
       {
         id: 1,
@@ -95,6 +96,7 @@ const main = async () => {
       },
     ]);
 
+    //lesson 1 challenges
     await db.insert(schema.challenges).values([
       {
         id: 1,
@@ -188,6 +190,31 @@ const main = async () => {
         correct: true,
         text: "el robot",
         audioSrc: "/es_robot.mp3",
+      },
+    ]);
+
+    //? lesson 2 challenges
+    await db.insert(schema.challenges).values([
+      {
+        id: 4,
+        lessonId: 2, //Verbs
+        type: "SELECT",
+        order: 1,
+        question: 'Which one of these is the "the man"?',
+      },
+      {
+        id: 5,
+        lessonId: 2, //Verbs
+        type: "ASSISTS",
+        order: 2,
+        question: '"the man"',
+      },
+      {
+        id: 6,
+        lessonId: 2, //Verbs
+        type: "SELECT",
+        order: 3,
+        question: 'Which one of these is the "the robot"?',
       },
     ]);
 
