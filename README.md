@@ -59,6 +59,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Deployment on Vercel
 - Mobile responsiveness
 - edited ShadCN Button components
+- Custom 404 page
 
 - If user don't have a course selected then user will always be redirected to the courses page.
 - Here we kept the DB queries & server actions separated.
