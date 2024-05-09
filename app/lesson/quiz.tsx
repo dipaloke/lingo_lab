@@ -67,7 +67,7 @@ export const Quiz = ({
     //? We pretend the percentage to be 0 when user is practicing meaning initial percentage is already 100%
     return initialPercentage === 100 ? 0 : initialPercentage;
   });
-  const [lessonId] = useState(initialLessonId);``
+  const [lessonId] = useState(initialLessonId);
 
   //Accessing challenges to show dynamically
   //first we get the current challenge

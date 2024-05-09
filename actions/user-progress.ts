@@ -1,12 +1,14 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
 import db from "@/db/drizzle";
+import { and, eq } from "drizzle-orm";
+
 import { getCoursesById, getUserProgress } from "@/db/queries";
 import { challengeProgress, userProgress, challenges } from "@/db/schema";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { and, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export const upsertUserProgress = async (courseId: number) => {
   const { userId } = await auth();
@@ -105,4 +107,36 @@ export const reduceHearts = async (challengeId: number) => {
   revalidatePath("/quests");
   revalidatePath("/leaderboard");
   revalidatePath(`/lesson/${lessonId}`);
+};
+
+export const refillHearts = async () => {
+  const currentUserProgress = await getUserProgress();
+
+  if (!currentUserProgress) {
+    throw new Error("User progress not found");
+  }
+
+  if (currentUserProgress.hearts === 5) {
+    throw new Error("Hearts are already full!");
+  }
+
+  const pointsToRefill = parseInt(process.env.POINTS_TO_REFILL as string);
+
+  if (currentUserProgress.points < pointsToRefill) {
+    throw new Error("Not enough points");
+  }
+
+  await db
+    .update(userProgress)
+    .set({
+      hearts: 5,
+      points: currentUserProgress.points - pointsToRefill,
+    })
+    .where(eq(userProgress.userId, currentUserProgress.userId));
+
+  revalidatePath("/shop");
+  revalidatePath("/lesson");
+  revalidatePath("/learn");
+  revalidatePath("/quest");
+  revalidatePath("/leaderboard");
 };
