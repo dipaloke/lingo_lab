@@ -1,18 +1,23 @@
 "use client";
-import { challengeOptions, challenges } from "@/db/schema";
+
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
+import { useAudio, useWindowSize, useMount } from "react-use";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Confetti from "react-confetti";
+
+import { reduceHearts } from "@/actions/user-progress";
+import { challengeOptions, challenges } from "@/db/schema";
+import { upsertChallengeProgress } from "@/actions/challenge-progress";
+import { useHeartsModal } from "@/store/use-hearts-modal";
+import { usePracticeModal } from "@/store/use-practice-modal";
+
 import { Header } from "./header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
-import { upsertChallengeProgress } from "@/actions/challenge-progress";
-import { toast } from "sonner";
-import { reduceHearts } from "@/actions/user-progress";
-import { useAudio, useWindowSize } from "react-use";
-import Image from "next/image";
 import { ResultCard } from "./result-card";
-import { useRouter } from "next/navigation";
-import Confetti from "react-confetti";
 
 type QuizProps = {
   initialLessonId: number;
@@ -32,6 +37,17 @@ export const Quiz = ({
   initialPercentage,
   userSubscription,
 }: QuizProps) => {
+  //* functionality to import hearts modal
+  const { open: openHeartsModal } = useHeartsModal();
+
+  const { open: openPracticeModal } = usePracticeModal();
+
+  useMount(() => {
+    if (initialPercentage === 100) {
+      openPracticeModal();
+    }
+  });
+
   const { height, width } = useWindowSize();
 
   const router = useRouter();
@@ -47,8 +63,11 @@ export const Quiz = ({
   const [pending, startTransition] = useTransition();
 
   const [hearts, setHearts] = useState(initialHearts);
-  const [percentage, setPercentage] = useState(initialPercentage);
-  const [lessonId] = useState(initialLessonId);
+  const [percentage, setPercentage] = useState(() => {
+    //? We pretend the percentage to be 0 when user is practicing meaning initial percentage is already 100%
+    return initialPercentage === 100 ? 0 : initialPercentage;
+  });
+  const [lessonId] = useState(initialLessonId);``
 
   //Accessing challenges to show dynamically
   //first we get the current challenge
@@ -81,6 +100,7 @@ export const Quiz = ({
     setActiveIndex((current) => current + 1); //there will be error after finishing a challenge. coz if last challenge index is 3. then next index will be 4 . but we don't have anything on index 4. handled below after onContinue.
   };
 
+  //? when user reach at the last section of a lesson challenge before finish screen
   const onContinue = () => {
     if (!selectedOption) return;
 
@@ -106,9 +126,8 @@ export const Quiz = ({
         upsertChallengeProgress(challenge.id)
           .then((response) => {
             if (response?.error === "hearts") {
-              //TODO: Modal to show the error
               toast.error("Missing hearts");
-              console.error("Missing hearts");
+              openHeartsModal();
               return;
             }
             correctControls.play();
@@ -129,7 +148,7 @@ export const Quiz = ({
           .then((response) => {
             if (response?.error === "hearts") {
               toast.error("Missing Hearts");
-              console.error("missing hearts");
+              openHeartsModal();
               return;
             }
             incorrectControls.play();
