@@ -72,7 +72,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Packages:
 
-- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip, sonner, progress, dialog)
+- [ShadCn](https://ui.shadcn.com/docs) - reuseable component library.(button, sheet, tooltip, sonner, progress, dialog, avatar, separator)
 - [@clerk/nextjs](https://clerk.com/docs/quickstarts/nextjs) - Auth
 - [drizzle-orm postgres](https://orm.drizzle.team/docs/get-started-postgresql#supabase) - Headless ORM for NodeJS, TypeScript and JavaScript
 - [drizzle-kit](https://github.com/drizzle-team/drizzle-kit-mirror#readme) - DrizzleKit - is a CLI migrator tool for DrizzleORM.

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 
 import { reduceHearts } from "@/actions/user-progress";
-import { challengeOptions, challenges } from "@/db/schema";
+import { challengeOptions, challenges, userSubscription } from "@/db/schema";
 import { upsertChallengeProgress } from "@/actions/challenge-progress";
 import { useHeartsModal } from "@/store/use-hearts-modal";
 import { usePracticeModal } from "@/store/use-practice-modal";
@@ -18,6 +18,7 @@ import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { ResultCard } from "./result-card";
+import { InfinityIcon } from "lucide-react";
 
 type QuizProps = {
   initialLessonId: number;
@@ -27,7 +28,11 @@ type QuizProps = {
   })[];
   initialHearts: number;
   initialPercentage: number;
-  userSubscription: any; //TODO: Replace with db subscription type
+  userSubscription:
+    | (typeof userSubscription.$inferSelect & {
+        isActive: boolean;
+      })
+    | null;
 };
 
 export const Quiz = ({
@@ -199,7 +204,16 @@ export const Quiz = ({
           <div className="flex items-center gap-x-4 w-full">
             {/* we will know how many points user earned by counting th amount of challenges   */}
             <ResultCard variant="points" value={challenges.length * 10} />
-            <ResultCard variant="hearts" value={hearts} />
+            <ResultCard
+              variant="hearts"
+              value={
+                userSubscription?.isActive ? (
+                  <InfinityIcon className="h-6 w-6 shrink-0" />
+                ) : (
+                  hearts
+                )
+              }
+            />
           </div>
         </div>
         <Footer

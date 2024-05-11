@@ -2,13 +2,18 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 import db from "@/db/drizzle";
 import { and, eq } from "drizzle-orm";
 
-import { getCoursesById, getUserProgress } from "@/db/queries";
+import {
+  getCoursesById,
+  getUserProgress,
+  getUserSubscription,
+} from "@/db/queries";
 import { challengeProgress, userProgress, challenges } from "@/db/schema";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { POINTS_TO_REFILL } from "@/constants";
 
 export const upsertUserProgress = async (courseId: number) => {
   const { userId } = await auth();
@@ -24,10 +29,10 @@ export const upsertUserProgress = async (courseId: number) => {
     throw new Error("Course not found");
   }
 
-  //TODO: Enable once units and lessons are added
-  //   if(!course.units.length || !course.units[0].lessons.length) {
-  //     throw new Error("Course is empty")
-  //   }
+
+  if (!course.units.length || !course.units[0].lessons.length) {
+    throw new Error("Course is empty");
+  }
 
   const existingUserProgress = await getUserProgress();
   if (existingUserProgress) {
@@ -62,7 +67,8 @@ export const reduceHearts = async (challengeId: number) => {
   if (!userId) throw new Error("unauthorized");
 
   const currentUserProgress = await getUserProgress();
-  //TODO: Get user subscription
+
+  const userSubscription = await getUserSubscription();
 
   const challenge = await db.query.challenges.findFirst({
     where: eq(challenges.id, challengeId),
@@ -89,7 +95,9 @@ export const reduceHearts = async (challengeId: number) => {
     throw new Error("User progress not found");
   }
 
-  //TODO: Handle Subscription
+  if (userSubscription?.isActive) {
+    return { error: "subscription" };
+  }
 
   if (currentUserProgress.hearts === 0) {
     return { error: "hearts" };
@@ -120,7 +128,7 @@ export const refillHearts = async () => {
     throw new Error("Hearts are already full!");
   }
 
-  const pointsToRefill = parseInt(process.env.POINTS_TO_REFILL as string);
+  const pointsToRefill = POINTS_TO_REFILL;
 
   if (currentUserProgress.points < pointsToRefill) {
     throw new Error("Not enough points");

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 type Props = {
-  value: number;
+  value?: number | any;
   variant: "points" | "hearts";
 };
 

@@ -1,11 +1,13 @@
 "use client";
+import { useTransition } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { useTransition } from "react";
+
 import { refillHearts } from "@/actions/user-progress";
 import { createStripeUrl } from "@/actions/user-subscription";
+import { POINTS_TO_REFILL } from "@/constants";
 
 type Props = {
   hearts: number;
@@ -14,12 +16,10 @@ type Props = {
 };
 
 export const Items = ({ hasActiveSubscription, hearts, points }: Props) => {
-  const points_to_refill = 10;
-
   const [pending, startTransition] = useTransition();
 
   const onRefillHearts = () => {
-    if (pending || hearts === 5 || points < points_to_refill) {
+    if (pending || hearts === 5 || points < POINTS_TO_REFILL) {
       return;
     }
 
@@ -51,14 +51,14 @@ export const Items = ({ hasActiveSubscription, hearts, points }: Props) => {
         </div>
         <Button
           onClick={onRefillHearts}
-          disabled={pending || hearts === 5 || points < points_to_refill}
+          disabled={pending || hearts === 5 || points < POINTS_TO_REFILL}
         >
           {hearts === 5 ? (
             "full"
           ) : (
             <div className="flex items-center">
               <Image src="/points.svg" alt="Points" height={20} width={20} />
-              <p>{points_to_refill}</p>
+              <p>{POINTS_TO_REFILL}</p>
             </div>
           )}
         </Button>
