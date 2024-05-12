@@ -10,7 +10,9 @@
     "db:studio": "npx drizzle-kit studio",
     "db:push": "npx drizzle-kit push:pg",
     "generate": "drizzle-kit generate:pg --out migrations-folder --schema db/schema.ts",
-    "db:seed": "tsx ./scripts/seed.ts"
+    "db:seed": "tsx ./scripts/seed.ts",
+    "db:prod": "tsx ./scripts/prod.ts",
+    "db:reset": "tsx ./scripts/reset.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.0.1",
@@ -29,7 +31,9 @@
     "next-themes": "^0.3.0",
     "pg": "^8.11.5",
     "postgres": "^3.4.4",
+    "ra-data-simple-rest": "^4.16.17",
     "react": "^18",
+    "react-admin": "^4.16.17",
     "react-circular-progressbar": "^2.1.0",
     "react-confetti": "^6.1.0",
     "react-dom": "^18",

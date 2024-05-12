@@ -7,3 +7,9 @@ export const quests = [
     { title: "Earn 500 XP", value: 500 },
     { title: "Earn 1000 XP", value: 1000 },
   ];
+
+
+  // Only this clerk userIds are allowed to enter into admin dashboard.
+  export const adminIds = [
+    "user_2g6BaDwXqyzhjjDXLY7cfKtR4P1"
+  ]
