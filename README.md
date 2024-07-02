@@ -47,7 +47,7 @@
 - [pg](https://www.npmjs.com/package/pg) - Non-blocking PostgreSQL client for Node.js.
 - [tsx](https://www.npmjs.com/package/tsx) - TypeScript Execute (tsx): The easiest way to run TypeScript in Node.js.(using for seeding our DB)
 - [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar#readme) - A circular progressbar component, built with SVG and extensively customizable
-- [zustand](https://github.com/pmndrs/zustand) - A small, fast and scalable bear-bones state-management solution.
+- [zustand](https://github.com/pmndrs/zustand) - A small, fast and scalable bear-bones state-management solution. 
 - [react-use](https://github.com/streamich/react-use) - collection of essential react hooks.
 - [react-confetti](https://www.npmjs.com/package/react-confetti) - Confetti without the cleanup.
 - [stripe](https://www.npmjs.com/package/stripe) - payment & subscription
